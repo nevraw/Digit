@@ -21,27 +21,17 @@
  
     <div id="main" style="display:none">
 
-    <p id="ptblBackgroundSelection" style="display:none">
-        <span class="label">Display or hide outline shapes</span>
-    </p>
-    <table id="tblBackgroundSelection" style="display:none">
-            <tr>
-                <td title="Hide outline shapes">
-                    <div style="width: 0; height: 0;border-bottom: 50px solid transparent;border-right: 50px solid transparent;"></div>
-                    <input type="radio" name="background" value="0" style="top:-25px; left: -7px" ;" />
-                </td>
-
-                <td title="Display outline shapes">
-                    <div style="width: 0; height: 0; border-bottom: 50px solid transparent;border-left: 50px solid transparent;"></div>
-                    <input type="radio" name="background" value="1" style="top:-25px; left: 7px" checked="checked";" />
-                </td>
-            </tr>
-    </table>
-
-        <form method="post" target="_top" >
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="ZT2CBJ5JNMTYA">
-            <br />
+	<form id="config" role="form" class="input-lg" style="padding:10px">
+		<fieldset style="padding:6px">
+			<legend>Outline shapes</legend>
+			<div class="radio">
+			<label>
+				<input type="radio" name="background" value="on" checked>Display outline shapes 
+				<input type="radio" name="background" value="off">Hide outline shapes 
+			</label>
+			</div>
+		</fieldset>
+                <br><br>     
 
             <input id="xbtnSave" type="button" value="Save" style="margin-right:30px">
             <input id="xbtnCancel" type="button" value="Cancel" style="margin-right:30px">
