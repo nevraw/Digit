@@ -23,9 +23,17 @@
         <span class="label">Display or hide outline shapes</span>
     </p>
     <table id="tblColorSelection" style="display:none">
-        <tr>
-            <td><label><input name="background" id="background" class="button">&nbsp;Display outline shapes</label></td>
-        </tr>
+            <tr>
+                <td title="Hide outline shapes">
+                    <div style="width: 0; height: 0;border-bottom: 50px solid transparent;border-right: 50px solid transparent;"></div>
+                    <input type="radio" name="background" value="0" style="top:-25px; left: -7px" ;" />
+                </td>
+
+                <td title="Display outline shapes">
+                    <div style="width: 0; height: 0; border-bottom: 50px solid transparent;border-left: 50px solid transparent;"></div>
+                    <input type="radio" name="background" value="1" style="top:-25px; left: 7px" checked="checked";" />
+                </td>
+            </tr>
     </table>
 
     <div id="main" style="display:none">
