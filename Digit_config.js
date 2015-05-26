@@ -41,11 +41,10 @@ $(document).ready(function () {
 
     if(settings==null) {
         settings = {};
+        $(":radio[value=" + settings.background + "]").attr('checked', true);
       
     }
-    $(":radio[value=" + settings.background + "]").attr('checked', true);
-    settings.background = background === 'on';
-    
+
     $('.number').css({
         top:'-290px',
         left: '77px'
