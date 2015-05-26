@@ -15,7 +15,7 @@ $(document).ready(function () {
 
     $('#xbtnSave').click(function () {
 
-        localStorage.setItem("tsettings", JSON.stringify(settings));
+        localStorage.setItem("Digit_settings", JSON.stringify(settings));
         
         var location = (decodeURIComponent(getURLVariable('return_to')) || "pebblejs://close#") + encodeURIComponent(JSON.stringify(settings));
         document.location = location;
@@ -32,7 +32,7 @@ $(document).ready(function () {
 
 
     try {
-        settings = JSON.parse(localStorage.getItem("tsettings"));
+        settings = JSON.parse(localStorage.getItem("Digit_settings"));
     }
     catch(err) {
         settings = null;
