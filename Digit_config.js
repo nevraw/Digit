@@ -15,9 +15,9 @@ $(document).ready(function () {
 
     $('#xbtnSave').click(function () {
 
-        localStorage.setItem("DigitSettings", JSON.stringify(settings));
+        localStorage.setItem("DigitSettings", JSON.stringify(saveOptions()));
         
-        var location = (decodeURIComponent(getURLVariable('return_to')) || "pebblejs://close#") + encodeURIComponent(JSON.stringify(settings));
+        var location = (decodeURIComponent(getURLVariable('return_to')) || "pebblejs://close#") + encodeURIComponent(JSON.stringify(saveOptions()));
         document.location = location;
 
     })
@@ -43,7 +43,16 @@ $(document).ready(function () {
         settings = {};
     }
 
-    $(":radio[value=" + settings.background + "]").attr('checked', true);
+    function saveOptions() {
+		var params = {};
+		$('#config').serializeArray().forEach(function(pair) {
+			params[pair.name] = pair.value;
+		});
+		var options = {
+			background:	params.background === 'on'
+		}
+		return options;
+	}
 
     $('.number').css({
         top:'-290px',
@@ -62,3 +71,68 @@ $(document).ready(function () {
     $('#main').show();
 
 });
+
+
+
+
+
+
+
+
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script>
+		var LATEST = "1.0";
+		function saveOptions() {
+			var params = {};
+			$('#config').serializeArray().forEach(function(pair) {
+				params[pair.name] = pair.value;
+			});
+			var options = {
+				invert:		params.invert === 'on',
+				background:	params.background === 'on',
+				hour_24:	params.hour_24 === 'on'
+			}
+			return options;
+		}
+		function applyOptions() {
+			var $form	= $('#config');
+			var opts	= JSON.parse(getParam('options'));
+			if (opts && opts.invert) {
+				$form.find('[name="invert"]').prop('checked', true);
+			}
+			if (opts && opts.background) {
+				$form.find('[name="background"]').prop('checked', true);
+			}
+			if (opts && opts.hour_24) {
+				$form.find('[name="hour_24"]').prop('checked', true);
+			}
+		}
+		function getParam(key) {
+			var params = window.location.hash;
+			var val;
+			params.replace(/(?:^|[#&])([a-z]+)=([^&]+)/ig, function(_, k, v) {
+				if (key === k) {
+					val = decodeURIComponent(v);
+				}
+			});
+			return val;
+		}
+		function parseVersion(verStr) {
+			var parts = verStr.split('.');
+			return parts.reduce(function(sum, part) {
+				return (sum * 1000) + parseInt(part, 10);
+			}, 0);
+		}
+		$("#b-submit").click(function() {
+			var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+			document.location = location;
+		});
+		var version = getParam('v');
+		if (!version || (parseVersion(version) < parseVersion(LATEST))) {
+			$('#update-available').removeClass('hidden');
+		}
+		else {
+			$('#up-to-date').removeClass('hidden');
+		}
+		applyOptions();
+   </script>
