@@ -41,9 +41,9 @@ $(document).ready(function () {
 
     if(settings==null) {
         settings = {};
-        $(":radio[value=" + settings.background + "]").attr('checked', true);
-      
     }
+
+    $(":radio[value=" + settings.background + "]").attr('checked', true);
 
     $('.number').css({
         top:'-290px',
