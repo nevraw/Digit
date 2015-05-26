@@ -15,7 +15,7 @@ $(document).ready(function () {
 
     $('#xbtnSave').click(function () {
 
-        localStorage.setItem("Digit_settings", JSON.stringify(settings));
+        localStorage.setItem("DigitSettings", JSON.stringify(settings));
         
         var location = (decodeURIComponent(getURLVariable('return_to')) || "pebblejs://close#") + encodeURIComponent(JSON.stringify(settings));
         document.location = location;
@@ -32,7 +32,7 @@ $(document).ready(function () {
 
 
     try {
-        settings = JSON.parse(localStorage.getItem("Digit_settings"));
+        settings = JSON.parse(localStorage.getItem("DigitSettings"));
     }
     catch(err) {
         settings = null;
@@ -43,9 +43,8 @@ $(document).ready(function () {
         settings = {};
       
     }
-
-
     $(":radio[value=" + settings.background + "]").attr('checked', true);
+    settings.background = background === 'on';
     
     $('.number').css({
         top:'-290px',
